@@ -56,5 +56,5 @@ const getSharedContent = asyncHandler(async(req:Request,res:Response)=>{
         content,
     });
 });
-export{toggleShareLink,getSharedContent,listAllShares};
+export{toggleShareLink,getSharedContent};
 

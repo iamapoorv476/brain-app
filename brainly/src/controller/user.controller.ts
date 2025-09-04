@@ -75,7 +75,7 @@ const loginUser = asyncHandler(async (req: Request, res: Response) => {
     throw new ApiError(400, "Username and password are required");
   }
 
-  const existedUser = await User.findOne({ username });
+  const existedUser = await User.findOne({ username:username.toLowerCase() });
 
   if (!existedUser) {
     throw new ApiError(400, "User does not exist!");
