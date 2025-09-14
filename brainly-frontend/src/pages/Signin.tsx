@@ -23,7 +23,7 @@ export function Signin(){
             });
             
             
-            localStorage.setItem("token", (response.data as any).token);
+            localStorage.setItem("token", (response.data as any).data.accessToken);
            
             navigate("/dashboard");
             
