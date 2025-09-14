@@ -27,7 +27,7 @@ export function useContent() {
       
       const response = await api.get('/api/v1/contents/find', {
         headers: {
-          'Authorization': localStorage.getItem('token')
+         'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       });
       
