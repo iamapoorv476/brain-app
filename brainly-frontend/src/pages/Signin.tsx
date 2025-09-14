@@ -2,7 +2,8 @@ import { useRef } from "react";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+//@ts-ignore
+import api from "../utils/api";
 
 export function Signin(){
     const usernameRef = useRef<HTMLInputElement>(null);
@@ -16,7 +17,7 @@ export function Signin(){
         console.log("Signin attempt:", { username, password });
 
         try{
-            const response = await axios.post("/api/v1/users/login", {
+            const response = await api.post("/api/v1/users/login", {
                 username,
                 password
             });
