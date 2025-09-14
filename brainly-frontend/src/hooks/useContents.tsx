@@ -5,7 +5,7 @@ import axios from 'axios';
 interface Content {
   _id: string;
   title: string;
-  links: string; // Your API returns 'links' not 'link'
+  links: string; 
   type: 'youtube' | 'twitter';
   user: string;
   tags: string[];

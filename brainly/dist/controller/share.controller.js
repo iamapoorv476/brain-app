@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.listAllShares = exports.getSharedContent = exports.toggleShareLink = void 0;
+exports.getSharedContent = exports.toggleShareLink = void 0;
 const asyncHandler_1 = __importDefault(require("../utils/asyncHandler"));
 const ApiError_1 = require("../utils/ApiError");
 const share_model_1 = __importDefault(require("../models/share.model"));

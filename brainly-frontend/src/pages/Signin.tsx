@@ -23,6 +23,7 @@ export function Signin(){
             
             
             localStorage.setItem("token", response.data.token);
+           
             navigate("/dashboard");
             
         } catch (error) {

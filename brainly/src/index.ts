@@ -48,20 +48,20 @@ const startServer = async () => {
     const mongoUri = process.env.MONGODB_URI as string;
 
     if (!mongoUri) {
-        console.error("❌ MONGODB_URI not defined in .env file");
+        console.error(" MONGODB_URI not defined in .env file");
         return;
     }
 
     try {
         await dbconnect(mongoUri);
         app.listen(PORT, () => {
-            console.log(`🚀 Server running on http://localhost:${PORT}`);
+            console.log(` Server running on http://localhost:${PORT}`);
             console.log('Available routes:');
             console.log('GET  /test');
             console.log('POST /api/v1/users/register');
         });
     } catch (error) {
-        console.error("❌ Failed to connect to the database:", error);
+        console.error(" Failed to connect to the database:", error);
         process.exit(1);
     }
 };

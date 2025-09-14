@@ -50,7 +50,7 @@ const loginUser = (0, asyncHandler_1.default)(async (req, res) => {
     if (!username || !password) {
         throw new ApiError_1.ApiError(400, "Username and password are required");
     }
-    const existedUser = await user_model_1.default.findOne({ username });
+    const existedUser = await user_model_1.default.findOne({ username: username.toLowerCase() });
     if (!existedUser) {
         throw new ApiError_1.ApiError(400, "User does not exist!");
     }

@@ -7,9 +7,9 @@ interface CardProps {
 }
 
 export function Card({ title, link, type }: CardProps) {
-    // Function to extract YouTube video ID from various URL formats
+   
     const getYouTubeVideoId = (url: string): string | null => {
-        // Handle different YouTube URL formats
+       
         const patterns = [
             /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
             /youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]{11})/,
@@ -52,7 +52,7 @@ export function Card({ title, link, type }: CardProps) {
                     {type === "youtube" && (
                         <div className="w-full">
                             {videoId ? (
-                                // If we can extract video ID, try to embed
+                               
                                 <div className="relative">
                                     <iframe 
                                         className="w-full h-40 rounded"
@@ -65,7 +65,7 @@ export function Card({ title, link, type }: CardProps) {
                                     ></iframe>
                                 </div>
                             ) : (
-                                // Fallback for invalid YouTube URLs
+                               
                                 <a 
                                     href={link} 
                                     target="_blank" 

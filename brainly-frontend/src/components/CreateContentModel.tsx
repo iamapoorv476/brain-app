@@ -12,7 +12,7 @@ enum ContentType {
 interface CreateContentModalProps {
     open: boolean;
     onClose: () => void;
-    onContentAdded?: () => void; // Add this prop to trigger refresh
+    onContentAdded?: () => void; 
 }
 
 export function CreateContentModal({ open, onClose, onContentAdded }: CreateContentModalProps) {
@@ -45,11 +45,11 @@ export function CreateContentModal({ open, onClose, onContentAdded }: CreateCont
 
             console.log("Content added successfully:", response.data);
             
-            // Clear the form
+           
             if (titleRef.current) titleRef.current.value = "";
             if (linkRef.current) linkRef.current.value = "";
             
-            // Trigger refresh in parent component
+            
             if (onContentAdded) {
                 onContentAdded();
             }

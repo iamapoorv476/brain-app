@@ -8,11 +8,11 @@ import {
 
 const router = express.Router();
 
-console.log('📋 Content routes loaded!');
+console.log(' Content routes loaded!');
 
 
 router.get('/test', (req: Request, res: Response) => {
-    console.log('✅ Content test route hit!');
+    console.log(' Content test route hit!');
     res.json({ 
         message: 'Content routes are working!',
         success: true 
