@@ -1,6 +1,7 @@
 
 import { useEffect, useState, useCallback } from "react";
-import axios from 'axios';
+//@ts-ignore
+import api from "../utils/api";
 
 interface Content {
   _id: string;
@@ -24,7 +25,7 @@ export function useContent() {
     
     try {
       
-      const response = await axios.get('/api/v1/contents/find', {
+      const response = await api.get('/api/v1/contents/find', {
         headers: {
           'Authorization': localStorage.getItem('token')
         }

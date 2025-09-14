@@ -2,7 +2,8 @@ import { useRef, useState } from "react";
 import { CrossIcon } from "../icons/CrossIcon";
 import { Button } from "./Button";
 import { Input } from "./Input";
-import axios from "axios";
+//@ts-ignore
+import api from "../utils/api";
 /* @ts-ignore */
 enum ContentType {
     Youtube = "youtube",
@@ -35,7 +36,7 @@ export function CreateContentModal({ open, onClose, onContentAdded }: CreateCont
         setIsLoading(true);
         
         try {
-            const response = await axios.post("/api/v1/contents/create", {
+            const response = await api.post("/api/v1/contents/create", {
                 link,
                 title,
                 type

@@ -7,7 +7,8 @@ import { ShareIcon } from "../icons/ShareIcon";
 import { useContent } from "../hooks/useContents";
 import { Sidebar } from "../components/Sidebar";
 import { Settings } from "../pages/Settings";
-import axios from "axios";
+//@ts-ignore
+import api from "../utils/api";
 
 
 interface ThemeClasses {
@@ -412,7 +413,7 @@ export function Dashboard() {
   const handleShareBrain = async () => {
     setIsSharing(true);
     try {
-      const response = await axios.post<ApiResponse>("/api/v1/shareLink", {
+      const response = await api.post<ApiResponse>("/api/v1/shareLink", {
         share: true,
       }, {
         headers: {

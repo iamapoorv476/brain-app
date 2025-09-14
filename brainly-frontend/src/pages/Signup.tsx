@@ -2,7 +2,8 @@ import { useRef } from "react";
 import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+//@ts-ignore
+import api from "../utils/api";
 
 export function Signup() {
     /* @ts-ignore */
@@ -18,7 +19,7 @@ export function Signup() {
         console.log("Signup attempt:", { username, password });
         
         try {
-            await axios.post("/api/v1/users/register", {
+            await api.post("/api/v1/users/register", {
                 username,
                 password
             });
