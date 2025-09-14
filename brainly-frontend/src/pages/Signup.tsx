@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export function Signup() {
+    /* @ts-ignore */
     const usernameRef = useRef<HTMLInputElement>();
+    /* @ts-ignore */
     const passwordRef = useRef<HTMLInputElement>();
     const navigate = useNavigate();
 

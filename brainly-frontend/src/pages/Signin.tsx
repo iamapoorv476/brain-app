@@ -22,7 +22,7 @@ export function Signin(){
             });
             
             
-            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("token", (response.data as any).token);
            
             navigate("/dashboard");
             

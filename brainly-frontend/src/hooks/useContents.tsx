@@ -32,7 +32,7 @@ export function useContent() {
       
       console.log('Full API response:', response.data);
       
-      
+      /* @ts-ignore */
       const fetchedContents = response.data.data || [];
       
       console.log('Extracted contents:', fetchedContents);

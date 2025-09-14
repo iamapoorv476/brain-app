@@ -10,20 +10,100 @@ import { Settings } from "../pages/Settings";
 import axios from "axios";
 
 
-function useTheme() {
-  const [theme, setTheme] = useState('light');
+interface ThemeClasses {
+  theme: string;
+  isDark: boolean;
+  bgClass: string;
+  cardBgClass: string;
+  textClass: string;
+  mutedTextClass: string;
+  borderClass: string;
+  inputBgClass: string;
+  placeholderClass: string;
+}
+
+interface SearchBarProps {
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  totalResults: number;
+  isDark: boolean;
+  cardBgClass: string;
+  borderClass: string;
+  textClass: string;
+  mutedTextClass: string;
+  placeholderClass: string;
+}
+
+interface FilterTabsProps {
+  activeFilter: string;
+  setActiveFilter: (filter: string) => void;
+  contentCounts: {
+    total: number;
+    youtube: number;
+    twitter: number;
+  };
+  isDark: boolean;
+  cardBgClass: string;
+  borderClass: string;
+  textClass: string;
+}
+
+interface ViewToggleProps {
+  viewMode: string;
+  setViewMode: (mode: string) => void;
+  isDark: boolean;
+  cardBgClass: string;
+}
+
+interface StatsBarProps {
+  totalContent: number;
+  filteredContent: number;
+  activeFilter: string;
+  isDark: boolean;
+  cardBgClass: string;
+  borderClass: string;
+  textClass: string;
+  mutedTextClass: string;
+}
+
+interface ShareModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  shareUrl: string;
+  isDark: boolean;
+  cardBgClass: string;
+  textClass: string;
+  mutedTextClass: string;
+}
+
+interface EmptyStateProps {
+  searchQuery: string;
+  activeFilter: string;
+  onAddContent: () => void;
+  isDark: boolean;
+  cardBgClass: string;
+  borderClass: string;
+  textClass: string;
+  mutedTextClass: string;
+}
+
+interface ApiResponse {
+  hash: string;
+  data?: any;
+}
+
+function useTheme(): ThemeClasses {
+  const [theme, setTheme] = useState<string>('light');
   
   useEffect(() => {
     const savedTheme = localStorage.getItem("theme") || "light";
     setTheme(savedTheme);
     
-    
-    const handleStorageChange = (e) => {
+    const handleStorageChange = (e: StorageEvent) => {
       if (e.key === 'theme') {
         setTheme(e.newValue || 'light');
       }
     };
-    
     
     const checkTheme = () => {
       const currentTheme = localStorage.getItem("theme") || "light";
@@ -56,7 +136,17 @@ function useTheme() {
   };
 }
 
-function SearchBar({ searchQuery, setSearchQuery, totalResults, isDark, cardBgClass, borderClass, textClass, mutedTextClass, placeholderClass }) {
+function SearchBar({ 
+  searchQuery, 
+  setSearchQuery, 
+  totalResults, 
+  isDark, 
+  cardBgClass, 
+  borderClass, 
+  textClass, 
+  mutedTextClass, 
+  placeholderClass 
+}: SearchBarProps) {
   return (
     <div className="relative mb-6">
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -82,7 +172,7 @@ function SearchBar({ searchQuery, setSearchQuery, totalResults, isDark, cardBgCl
   );
 }
 
-function FilterTabs({ activeFilter, setActiveFilter, contentCounts, isDark, cardBgClass, borderClass, textClass }) {
+function FilterTabs({ activeFilter, setActiveFilter, contentCounts, isDark, cardBgClass, borderClass, textClass }: FilterTabsProps) {
   const filters = [
     { id: 'all', label: 'All', count: contentCounts.total },
     { id: 'youtube', label: 'YouTube', count: contentCounts.youtube },
@@ -115,7 +205,7 @@ function FilterTabs({ activeFilter, setActiveFilter, contentCounts, isDark, card
   );
 }
 
-function ViewToggle({ viewMode, setViewMode, isDark, cardBgClass }) {
+function ViewToggle({ viewMode, setViewMode, isDark, cardBgClass }: ViewToggleProps) {
   return (
     <div className={`flex rounded-lg p-1 ${isDark ? 'bg-slate-800' : 'bg-gray-100'}`}>
       <button
@@ -148,7 +238,7 @@ function ViewToggle({ viewMode, setViewMode, isDark, cardBgClass }) {
   );
 }
 
-function StatsBar({ totalContent, filteredContent, activeFilter, isDark, cardBgClass, borderClass, textClass, mutedTextClass }) {
+function StatsBar({ totalContent, filteredContent, activeFilter, isDark, cardBgClass, borderClass, textClass, mutedTextClass }: StatsBarProps) {
   const getFilterLabel = () => {
     switch(activeFilter) {
       case 'youtube': return 'YouTube videos';
@@ -176,7 +266,7 @@ function StatsBar({ totalContent, filteredContent, activeFilter, isDark, cardBgC
   );
 }
 
-function ShareModal({ isOpen, onClose, shareUrl, isDark, cardBgClass, textClass, mutedTextClass }) {
+function ShareModal({ isOpen, onClose, shareUrl, isDark, cardBgClass, textClass, mutedTextClass }: ShareModalProps) {
   const [copied, setCopied] = useState(false);
 
   const copyToClipboard = async () => {
@@ -238,7 +328,7 @@ function ShareModal({ isOpen, onClose, shareUrl, isDark, cardBgClass, textClass,
   );
 }
 
-function EmptyState({ searchQuery, activeFilter, onAddContent, isDark, cardBgClass, borderClass, textClass, mutedTextClass }) {
+function EmptyState({ searchQuery, activeFilter, onAddContent, isDark, cardBgClass, borderClass, textClass, mutedTextClass }: EmptyStateProps) {
   const getEmptyMessage = () => {
     if (searchQuery) {
       return {
@@ -297,8 +387,7 @@ export function Dashboard() {
   const [viewMode, setViewMode] = useState('grid');
   const { contents, refresh, loading, error } = useContent();
   
-  
-  const { theme, isDark, bgClass, cardBgClass, textClass, mutedTextClass, borderClass, inputBgClass, placeholderClass } = useTheme();
+  const { theme, isDark, bgClass, cardBgClass, textClass, mutedTextClass, borderClass, placeholderClass } = useTheme();
 
   useEffect(() => {
     refresh();
@@ -307,7 +396,7 @@ export function Dashboard() {
   const filteredContent = contents.filter(content => {
     const matchesSearch = !searchQuery || 
       content.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (content.tags && content.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase())));
+      (content.tags && content.tags.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase())));
     
     if (activeFilter === 'all') return matchesSearch;
     return matchesSearch && content.type === activeFilter;
@@ -322,7 +411,7 @@ export function Dashboard() {
   const handleShareBrain = async () => {
     setIsSharing(true);
     try {
-      const response = await axios.post("/api/v1/shareLink", {
+      const response = await axios.post<ApiResponse>("/api/v1/shareLink", {
         share: true,
       }, {
         headers: {
@@ -397,7 +486,6 @@ export function Dashboard() {
           <Settings />
         ) : (
           <>
-           
             <div className="mb-8">
               <div className="flex items-center justify-between mb-6">
                 <div>
@@ -416,7 +504,6 @@ export function Dashboard() {
                 />
               </div>
 
-              
               <SearchBar 
                 searchQuery={searchQuery} 
                 setSearchQuery={setSearchQuery}
@@ -429,7 +516,6 @@ export function Dashboard() {
                 placeholderClass={placeholderClass}
               />
 
-              
               <FilterTabs 
                 activeFilter={activeFilter}
                 setActiveFilter={setActiveFilter}
@@ -440,7 +526,6 @@ export function Dashboard() {
                 textClass={textClass}
               />
 
-             
               <StatsBar 
                 totalContent={contents.length}
                 filteredContent={filteredContent.length}
@@ -453,7 +538,6 @@ export function Dashboard() {
               />
             </div>
 
-            
             <div className="flex justify-between items-center mb-8">
               <div className="flex gap-4">
                 <Button 
@@ -479,7 +563,6 @@ export function Dashboard() {
               )}
             </div>
 
-            
             {filteredContent.length === 0 ? (
               <EmptyState 
                 searchQuery={searchQuery}
@@ -516,7 +599,6 @@ export function Dashboard() {
               </div>
             )}
 
-           
             <CreateContentModal 
               open={modalOpen} 
               onClose={() => setModalOpen(false)}
@@ -536,8 +618,7 @@ export function Dashboard() {
         )}
       </div>
 
-     
-      <style jsx>{`
+      <style>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;

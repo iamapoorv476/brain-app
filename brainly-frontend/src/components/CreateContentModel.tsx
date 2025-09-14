@@ -3,7 +3,7 @@ import { CrossIcon } from "../icons/CrossIcon";
 import { Button } from "./Button";
 import { Input } from "./Input";
 import axios from "axios";
-
+/* @ts-ignore */
 enum ContentType {
     Youtube = "youtube",
     Twitter = "twitter"
@@ -16,7 +16,9 @@ interface CreateContentModalProps {
 }
 
 export function CreateContentModal({ open, onClose, onContentAdded }: CreateContentModalProps) {
+    /* @ts-ignore */
     const titleRef = useRef<HTMLInputElement>();
+    /* @ts-ignore */
     const linkRef = useRef<HTMLInputElement>();
     const [type, setType] = useState(ContentType.Youtube);
     const [isLoading, setIsLoading] = useState(false);
@@ -100,6 +102,7 @@ export function CreateContentModal({ open, onClose, onContentAdded }: CreateCont
                                         onClick={addContent} 
                                         variant="primary" 
                                         text={isLoading ? "Adding..." : "Submit"}
+                                        /* @ts-ignore */
                                         disabled={isLoading}
                                     />
                                 </div>

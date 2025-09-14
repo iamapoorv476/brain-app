@@ -20,9 +20,7 @@ export function Sidebar({
     }
   };
 
-  
   const isDark = theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-  
   
   const bgClass = isDark ? 'bg-slate-900' : 'bg-white';
   const borderClass = isDark ? 'border-slate-700' : 'border-gray-100';
@@ -46,7 +44,7 @@ export function Sidebar({
         <p className={`text-sm ${mutedTextClass} ml-13`}>Your Second Brain</p>
       </div>
 
-      
+     
       <div className="flex-1 px-4 py-6">
         <nav className="space-y-2">
           <SidebarItem
@@ -78,7 +76,7 @@ export function Sidebar({
         </nav>
       </div>
 
-      
+      {/* Footer Stats */}
       <div className={`px-6 py-4 border-t ${borderClass} ${footerBgClass}`}>
         <div className="space-y-2 mb-3">
           <div className="flex justify-between text-xs">
