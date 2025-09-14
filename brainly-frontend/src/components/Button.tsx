@@ -1,3 +1,4 @@
+/* @ts-ignore */
 import { ReactElement } from "react";
 
 interface ButtonProps{

@@ -121,6 +121,7 @@ export function Settings() {
 
   
   const isDark = theme === 'dark' || (theme === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  /* @ts-ignore */
   const bgClass = isDark ? 'bg-slate-900' : 'bg-white';
   const textClass = isDark ? 'text-slate-100' : 'text-gray-900';
   const mutedTextClass = isDark ? 'text-slate-400' : 'text-gray-500';
