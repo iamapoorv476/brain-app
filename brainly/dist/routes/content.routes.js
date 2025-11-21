@@ -7,9 +7,9 @@ const express_1 = __importDefault(require("express"));
 const auth_middleware_1 = require("../middleware/auth.middleware");
 const content_controller_1 = require("../controller/content.controller");
 const router = express_1.default.Router();
-console.log('📋 Content routes loaded!');
+console.log(' Content routes loaded!');
 router.get('/test', (req, res) => {
-    console.log('✅ Content test route hit!');
+    console.log(' Content test route hit!');
     res.json({
         message: 'Content routes are working!',
         success: true
